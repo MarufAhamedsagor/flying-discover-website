@@ -59,9 +59,9 @@
                      class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick=" totalFirstClassItem(true)" class="page-link"><i class="fas fa-plus"></i></button>
+                    <button onclick=" totalTicketItem('fclass', true)" class="page-link"><i class="fas fa-plus"></i></button>
 
-                    <button onclick="totalFirstClassItem(false)" class="page-link"><i class="fas fa-minus"></i></button>
+                    <button onclick="totalTicketItem('fclass',false)" class="page-link"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -71,9 +71,9 @@
                     <input id="economy-count" class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="totalEconomyItem(true)"  class="page-link"><i class="fas fa-plus"></i></button>
+                    <button onclick="totalTicketItem('economy', true)"  class="page-link"><i class="fas fa-plus"></i></button>
 
-                    <button onclick="totalEconomyItem(false)" class="page-link"><i class="fas fa-minus"></i></button>
+                    <button onclick="totalTicketItem('economy', false)" class="page-link"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="calculations">
@@ -82,7 +82,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$0.00</p>
+                        <p>$ <span id="sub-total">0.00</span></p>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$ <span id="vat-charge">0.00</span></p>
                     </div>
                 </div>
                 <hr>
@@ -100,7 +100,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$0.00</p>
+                        <p>$ <span id="total-purchase">0.00</span></p>
                     </div>
                 </div>
             </div>
@@ -117,47 +117,55 @@
 
     <script>
 
+           // First Class & Economy ticket Purchase Calculation
 
-
-           // First Class ticket Amount increasing decreasing
-          function totalFirstClassItem(isIncrease){
-             const firstClassInput = document.getElementById('fclass-count');
-             firstClassCount  = parseInt(firstClassInput.value); 
-             let fclassNewCount = firstClassCount;
+          function totalTicketItem(ticket, isIncrease){
+            const ticketCount  = userInput(ticket);
+             let ticketNewCount = ticketCount;
              if(isIncrease == true){
-                 fclassNewCount  = firstClassCount + 1;
+                 ticketNewCount  = ticketCount + 1;
              }
-             if(isIncrease == false && firstClassCount > 0){
-                 fclassNewCount  = firstClassCount - 1;
+             if(isIncrease == false && ticketCount > 0){
+                 ticketNewCount  = ticketCount - 1;
              }
-         firstClassInput.value = fclassNewCount;
-         let totalFclassAmount = fclassNewCount * 150;
-            document.getElementById('total-fclass').innerHTML = totalFclassAmount;
+              document.getElementById(ticket + '-count').value = ticketNewCount;
+             let totalTicket = 0;
+             if (ticket == 'fclass'){
+                totalTicket = ticketNewCount * 150;
+             }
+             if(ticket == 'economy'){
+                 totalTicket = ticketNewCount * 100;
+             }
+
+        
+            document.getElementById('total-' + ticket).innerHTML = totalTicket;
+
+            purchaseTicketAmount();
           }
 
+           
+
+       function  purchaseTicketAmount(){
+           
+        const  fclassCount = userInput('fclass');
+        const  economyCount = userInput('economy');
 
 
-          //     economy  ticket amount increase and decrease rate 
-        function totalEconomyItem(isIncrease){
-            const numberInput = document.getElementById('economy-count');
+        let   subTotal   = fclassCount * 150 + economyCount * 100;
+        document.getElementById('sub-total').innerHTML = subTotal;
+             const vatCharge = subTotal * 0.1;
+             document.getElementById('vat-charge').innerHTML = vatCharge;
+          
+              const totalPurchase = subTotal + vatCharge; 
+           document.getElementById('total-purchase').innerHTML = totalPurchase;
+       }
+         
+       function  userInput(ticket){
+       const ticketInput  =  document.getElementById(ticket + '-count');
+       const ticketCount = parseInt(ticketInput.value);
+            return ticketCount;
+       }
 
-            const economyCount = parseInt(numberInput.value);
-            let  economyNewCount = economyCount;
-        
-            if(isIncrease ==true){
-                economyNewCount = economyCount + 1;
-            }
-            if(isIncrease == false && economyCount > 0){
-                economyNewCount = economyCount - 1;
-            
-            }
-            numberInput.value = economyNewCount;
-            const totalEconomy = economyNewCount * 100;
-            document.getElementById('total-economy').innerHTML = totalEconomy;
-        }
-
-
-        
 
        </script>
 </body>
