@@ -7,7 +7,7 @@
 }
 body{
     font-family: 'Roboto', sans-serif;
-    background:url("images/bg.png");
+    background:url("../images/bg.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
@@ -67,8 +67,7 @@ nav ul li a:hover, a.active{
 }
 .plus-minus-btn{
     color: #3352F2;
-    font-size: 30px;
-    padding: 2px;
+    font-size: 22px;
     margin-top: 10px;
     word-spacing: 20px;
 }
