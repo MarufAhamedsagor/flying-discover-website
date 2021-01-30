@@ -53,12 +53,15 @@
             </div>
             <div class="input-group f-class">
                 <div>
-                    <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="text" name="" value="0">
+                    <label for="">First Class ($ <span id="total-fclass">150</span>)</label>
+
+                    <input id="fclass-count"
+                     class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button class="page-link"><i class="fas fa-plus"></i></button>
-                    <button class="page-link"><i class="fas fa-minus"></i></button>
+                    <button onclick=" totalFirstClassItem(true)" class="page-link"><i class="fas fa-plus"></i></button>
+
+                    <button onclick="totalFirstClassItem(false)" class="page-link"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -68,8 +71,9 @@
                     <input id="economy-count" class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button id="economy-increase" class="page-link"><i class="fas fa-plus"></i></button>
-                    <button id="economy-decrease" class="page-link"><i class="fas fa-minus"></i></button>
+                    <button onclick="totalEconomyItem(true)"  class="page-link"><i class="fas fa-plus"></i></button>
+
+                    <button onclick="totalEconomyItem(false)" class="page-link"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="calculations">
@@ -111,28 +115,49 @@
 
     <!--Thank You-->
 
-       <script>
-    //     economy-rate increase  
-       document.getElementById('economy-increase').addEventListener('click', function(){
-         const numberInput = document.getElementById('economy-count');
-         const economyCount = parseInt(numberInput.value);
-         const economyNewCount = economyCount + 1;
-          numberInput.value = economyNewCount;
-          let totalEconomy =  economyNewCount * 100;
-          document.getElementById('total-economy').innerHTML = totalEconomy;
-       })
+    <script>
 
-    //     economy -rate decrease
-        document.getElementById('economy-decrease').addEventListener('click', function(){
+
+
+           // First Class ticket Amount increasing decreasing
+          function totalFirstClassItem(isIncrease){
+             const firstClassInput = document.getElementById('fclass-count');
+             firstClassCount  = parseInt(firstClassInput.value); 
+             let fclassNewCount = firstClassCount;
+             if(isIncrease == true){
+                 fclassNewCount  = firstClassCount + 1;
+             }
+             if(isIncrease == false && firstClassCount > 0){
+                 fclassNewCount  = firstClassCount - 1;
+             }
+         firstClassInput.value = fclassNewCount;
+         let totalFclassAmount = fclassNewCount * 150;
+            document.getElementById('total-fclass').innerHTML = totalFclassAmount;
+          }
+
+
+
+          //     economy  ticket amount increase and decrease rate 
+        function totalEconomyItem(isIncrease){
             const numberInput = document.getElementById('economy-count');
+
             const economyCount = parseInt(numberInput.value);
-            const economyNewCount = economyCount - 1;
+            let  economyNewCount = economyCount;
+        
+            if(isIncrease ==true){
+                economyNewCount = economyCount + 1;
+            }
+            if(isIncrease == false && economyCount > 0){
+                economyNewCount = economyCount - 1;
+            
+            }
             numberInput.value = economyNewCount;
             const totalEconomy = economyNewCount * 100;
             document.getElementById('total-economy').innerHTML = totalEconomy;
-             
-        })
+        }
 
+
+        
 
        </script>
 </body>
