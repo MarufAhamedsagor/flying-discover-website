@@ -30,8 +30,9 @@
     </header>
 
     <!--Booking Section-->
-    <main class="main-content container">
-        <div class="booking-form">
+    <main class="main-content container" id="main-area">
+        
+        <div class="booking-form" id="form-area">
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
@@ -104,15 +105,22 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button class="btn-style" onclick="checkoutBox()">Book Now</button>
         </div>
 
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
         </div>
-    </section>
+    </main>
+        <section id="purchase-content">
+          <div id="content-area" class="content-area justify-content-center align-items-center">
+              <h1>Ticket Has been Successfully purchase</h1>
+              <p>see the dashboard about ticket purchase</p>
+          </div>
 
+        </section>
+    
     <!--Thank You-->
 
     <script>
@@ -164,6 +172,14 @@
        const ticketInput  =  document.getElementById(ticket + '-count');
        const ticketCount = parseInt(ticketInput.value);
             return ticketCount;
+       }
+
+    //      dynamically hide booking area
+       function checkoutBox(){
+         const bookingArea =  document.getElementById('main-area');
+         bookingArea.style.display = "none";
+         let contentArea = document.getElementById('content-area');
+         contentArea.style.display = 'block';
        }
 
 
