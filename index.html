@@ -54,7 +54,7 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="text" name="">
+                    <input class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
                     <button class="page-link"><i class="fas fa-plus"></i></button>
@@ -64,12 +64,12 @@
             
             <div class="input-group f-class">
                 <div>
-                    <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="text" name="">
+                    <label for="">Economy ($ <span id="total-economy">100</span>)</label>
+                    <input id="economy-count" class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button class="page-link"><i class="fas fa-plus"></i></button>
-                    <button class="page-link"><i class="fas fa-minus"></i></button>
+                    <button id="economy-increase" class="page-link"><i class="fas fa-plus"></i></button>
+                    <button id="economy-decrease" class="page-link"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="calculations">
@@ -78,7 +78,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p>$0.00</p>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$0.00</p>
                     </div>
                 </div>
             </div>
@@ -110,6 +110,31 @@
     </section>
 
     <!--Thank You-->
+
+       <script>
+    //     economy-rate increase  
+       document.getElementById('economy-increase').addEventListener('click', function(){
+         const numberInput = document.getElementById('economy-count');
+         const economyCount = parseInt(numberInput.value);
+         const economyNewCount = economyCount + 1;
+          numberInput.value = economyNewCount;
+          let totalEconomy =  economyNewCount * 100;
+          document.getElementById('total-economy').innerHTML = totalEconomy;
+       })
+
+    //     economy -rate decrease
+        document.getElementById('economy-decrease').addEventListener('click', function(){
+            const numberInput = document.getElementById('economy-count');
+            const economyCount = parseInt(numberInput.value);
+            const economyNewCount = economyCount - 1;
+            numberInput.value = economyNewCount;
+            const totalEconomy = economyNewCount * 100;
+            document.getElementById('total-economy').innerHTML = totalEconomy;
+             
+        })
+
+
+       </script>
 </body>
 
 </html>
